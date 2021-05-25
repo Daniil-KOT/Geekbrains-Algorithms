@@ -87,7 +87,7 @@ void bucket(int* arr, int size)
 	const int max = size;
 	const int b = 10;
 
-	int buckets[b][26];
+	int buckets[b][max + 1];
 
 	for (int i = 0; i < b; i++)
 	{
@@ -130,19 +130,17 @@ int main()
 
 	printArr(arr, SIZE);
 
-	bucket(arr, SIZE);
+	qsU(arr, 0, SIZE - 1);
 
 	printArr(arr, SIZE);
 
-	//	qsU(arr, 0, SIZE - 1);
-
-/*	int arr1[12] = { 0, 2, 8, 3, 4, 6, 5, 9, 8, 2, 7, 3 };
+	int arr1[12] = { 0, 2, 8, 3, 4, 6, 5, 9, 8, 2, 7, 3 };
 
 	printArr(arr1, 12);
 	
 	bucket(arr1, 12);
 
-	printArr(arr1, 12); */
+	printArr(arr1, 12); 
 
 }
 

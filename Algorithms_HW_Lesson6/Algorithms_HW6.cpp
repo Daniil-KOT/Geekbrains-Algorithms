@@ -87,6 +87,21 @@ void bucket(int* arr, int size)
 	const int max = size;
 	const int b = 10;
 
+	int sArr[max] = { 0 };
+	int iArr[max] = { 0 };
+
+
+	int sind = 0;
+	int iind = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] % 2 == 0)
+		{
+			sArr[sind++] = arr[i];
+			iArr[iind++] = i;
+		}
+	}
+
 	int buckets[b][max + 1];
 
 	for (int i = 0; i < b; i++)
@@ -98,9 +113,9 @@ void bucket(int* arr, int size)
 	{
 		for (int i = 0; i < max; i++)
 		{
-				int d = (arr[i] / digit) % b;
+				int d = (sArr[i] / digit) % b;
 				int counter = buckets[d][max];
-				buckets[d][counter] = arr[i];
+				buckets[d][counter] = sArr[i];
 				counter++;
 				buckets[d][max] = counter;
 		}
@@ -111,9 +126,19 @@ void bucket(int* arr, int size)
 		{
 			for (int j = 0; j < buckets[i][max]; j++)
 			{
-					arr[idx++] = buckets[i][j];
+					sArr[idx++] = buckets[i][j];
 			}
 			buckets[i][max] = 0;
+		}
+	}
+	
+	int idx = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (sArr[i] != 0)
+		{
+			arr[iArr[idx++]] = sArr[i];
 		}
 	}
 }
@@ -123,7 +148,10 @@ void bucket(int* arr, int size)
 
 int main()
 {
+//=============================EX.1===================================
+
 	const int SIZE = 25;
+
 	int arr[SIZE];
 
 	initArr(arr, SIZE, 100);
@@ -134,13 +162,20 @@ int main()
 
 	printArr(arr, SIZE);
 
-	int arr1[12] = { 0, 2, 8, 3, 4, 6, 5, 9, 8, 2, 7, 3 };
+//====================================================================
 
-	printArr(arr1, 12);
-	
-	bucket(arr1, 12);
+//=============================EX.2===================================
 
-	printArr(arr1, 12); 
+	int arr1[SIZE];
 
+	initArr(arr1, SIZE, 100);
+
+	printArr(arr1, SIZE);
+
+	bucket(arr1, SIZE);
+
+	printArr(arr1, SIZE);
+
+//====================================================================
 }
 

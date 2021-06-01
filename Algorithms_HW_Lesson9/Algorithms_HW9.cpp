@@ -57,21 +57,23 @@ Node* rem()
 	}
 	else
 	{
-		int i = 0;
+		int i;
 		int maxPos = 0;
 		Node* max = arr[0];
 		for (i = 1; i < tail; i++)
 		{
-			if (arr[i] == NULL)
-				continue;
 			if (arr[i]->pr > max->pr)
 			{
 				max = arr[i];
 				maxPos = i;
 			}
 		}
-		arr[maxPos] = NULL;
+		for (int j = maxPos; j < tail; j++)
+		{
+			arr[j] = arr[j + 1];
+		}
 		items--;
+		tail--;
 		return max;
 	}
 }
@@ -79,7 +81,7 @@ Node* rem()
 void printQueue()
 {
 	cout << "[";
-	for (int i = 0; i < SZ; ++i)
+	for (int i = 0; i < tail; ++i)
 	{
 		if (arr[i] == NULL)
 			cout << "[ *, * ]";

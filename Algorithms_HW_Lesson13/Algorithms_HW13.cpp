@@ -267,7 +267,7 @@ void vertexLinkCounterDFS(int st, const int sz)
     visited[st] = 1;
     for (r = 0; r < sz; r++)
     {
-        if (matrix[st][r] == 1)
+        if (matrix[st][r] == 1 && st != r)
             linkCounter[r]++;
 
         if (matrix[st][r] == 1 && visited[r] != 1)
@@ -275,33 +275,6 @@ void vertexLinkCounterDFS(int st, const int sz)
             vertexLinkCounterDFS(r, sz);
         }
     }
-}
-
-void vertexLinkCounterBFS(int st, const int size)
-{
-    List* lst = new List;
-    initList(lst);
-    int viz[SZ];
-    initArr(viz, size);
-
-    listEnqueue(lst, st);
-    while (lst->size > 0)
-    {
-        int idx = listDequeue(lst);
-        if (viz[idx] == 1)
-            continue;
-        viz[idx] = 1;
-        for (int i = 0; i < size; i++)
-        {
-            if (matrix[idx][i] == 1)
-                linkCounter[i]++;
-
-            if (matrix[idx][i] == 1 && viz[i] == 0)
-                listEnqueue(lst, i);
-        }
-    }
-
-    delete lst;
 }
 
 //============================================
@@ -366,13 +339,6 @@ int main()
     cout << endl << endl << "=================EX.2===================" << endl << endl;
 
     vertexLinkCounterDFS(0, SZ);
-    for (int i = 0; i < SZ; i++)
-        cout << "Links to vertex " << i + 1 << ": " << linkCounter[i] << endl;
-    initArr(linkCounter, SZ);
-
-    cout << endl;
-
-    vertexLinkCounterBFS(0, SZ);
     for (int i = 0; i < SZ; i++)
         cout << "Links to vertex " << i + 1 << ": " << linkCounter[i] << endl;
     initArr(linkCounter, SZ);
